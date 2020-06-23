@@ -125,7 +125,8 @@ public class loginPage extends javax.swing.JFrame {
            //add another verification step before instantiating the menu class.
            
            //instantiate the menu class 
-           
+           bankingMenu menu = new bankingMenu(); 
+           menu.setVisible(true);
        }
        else{ 
            //show a dialog that lets the user know that their username is incorrect.

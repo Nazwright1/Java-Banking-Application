@@ -11,22 +11,72 @@ package com.mycompany.bankingapplication;
  */
 public class Account {
     //balance for this account 
-    int balance; 
+    private int balance; 
     
     //tyoe of account
-    String accountType; 
+    private String accountType; 
     
     //account number 10 digits
-    String accountNumber; 
+    private String accountNumber; 
     
     //last transaction date 
-    String lastdate; 
+   
     
     //date of last transaction get data from database.
     
     
     //get all these values from the databaase when the account is instantiated.
-    
+
+    /**
+     *
+     */
+    public Account() { 
+        this.balance = 35;
+        this.accountType= "Checking"; 
+        this.accountNumber = "00000001";
+                }
+
+    /**
+     * @return the balance
+     */
+    public int getBalance() {
+        return balance;
+    }
+
+    /**
+     * @param balance the balance to set
+     */
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    /**
+     * @return the accountType
+     */
+    public String getAccountType() {
+        return accountType;
+    }
+
+    /**
+     * @param accountType the accountType to set
+     */
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
+
+    /**
+     * @return the accountNumber
+     */
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    /**
+     * @param accountNumber the accountNumber to set
+     */
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
     
     
 }
