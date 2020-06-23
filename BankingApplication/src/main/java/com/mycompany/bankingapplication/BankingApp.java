@@ -23,7 +23,7 @@ public class BankingApp {
     }
     
 }
-//all operations performed in this application will be on a bank account
+// operations performed in this application will be on a bank account
 
 class BankAccount { 
     
@@ -34,9 +34,8 @@ class BankAccount {
     String customerName; 
     
     String customerId; 
-    /*
-    *
-    */
+    
+    
     BankAccount(String cName, String cId){ 
         customerName = cName; 
         customerId = cId; 

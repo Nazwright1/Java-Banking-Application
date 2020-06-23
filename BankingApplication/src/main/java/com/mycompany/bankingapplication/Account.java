@@ -9,7 +9,15 @@ package com.mycompany.bankingapplication;
  *
  * @author nazwright
  */
-public class ScannerTest {
+public class Account {
+    //balance for this account 
+    int balance; 
+    
+    //tyoe of account
+    String accountType; 
+    
+    //account number 10 digits
+    String accountNumber; 
     
     
     
