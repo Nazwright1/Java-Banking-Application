@@ -10,7 +10,9 @@ package com.mycompany.bankingapplication;
  * @author nazwright
  */
 public class bankingMenu extends javax.swing.JFrame {
-
+//banking menu will display a list of Account objects from which to click from
+    //each account can be taken to the account info page associated with that account. 
+    //each account will have a menu of options.
     /**
      * Creates new form bankingMenu
      */

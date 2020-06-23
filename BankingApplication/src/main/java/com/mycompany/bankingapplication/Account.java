@@ -19,6 +19,14 @@ public class Account {
     //account number 10 digits
     String accountNumber; 
     
+    //last transaction date 
+    String lastdate; 
+    
+    //date of last transaction get data from database.
+    
+    
+    //get all these values from the databaase when the account is instantiated.
+    
     
     
 }
