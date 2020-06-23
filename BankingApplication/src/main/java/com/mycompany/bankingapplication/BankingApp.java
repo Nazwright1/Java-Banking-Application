@@ -19,8 +19,9 @@ public class BankingApp {
      */
     public static void main(String[] args) {
         
-      
-    }
+      loginPage login = new loginPage(); 
+      login.setVisible(true);
+    } 
     
 }
 // operations performed in this application will be on a bank account
