@@ -1,0 +1,10 @@
+3
+Checking
+0000001A
+7.32
+Savings 
+0000001B
+4000.84
+Bear Dividend 
+0000001C
+3.82

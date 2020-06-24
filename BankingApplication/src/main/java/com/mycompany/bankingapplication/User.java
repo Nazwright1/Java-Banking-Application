@@ -10,5 +10,7 @@ package com.mycompany.bankingapplication;
  * @author nazwright
  */
 public class User {
+    int id; 
+    String customerName; 
     
 }

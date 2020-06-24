@@ -5,13 +5,15 @@
  */
 package com.mycompany.bankingapplication;
 
+import javax.swing.ListModel;
+
 /**
  *
  * @author nazwright
  */
-public class Account {
+public class Account  {
     //balance for this account 
-    private int balance; 
+    private double balance; 
     
     //tyoe of account
     private String accountType; 
@@ -39,14 +41,14 @@ public class Account {
     /**
      * @return the balance
      */
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
     /**
      * @param balance the balance to set
      */
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
@@ -77,6 +79,9 @@ public class Account {
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
-    
+    @Override
+    public String toString() { 
+        return getAccountType() + "         " + getAccountNumber() + "/n" + getBalance(); 
+    }
     
 }

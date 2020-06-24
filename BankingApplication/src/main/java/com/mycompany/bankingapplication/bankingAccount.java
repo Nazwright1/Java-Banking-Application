@@ -16,6 +16,7 @@ public class bankingAccount extends javax.swing.JFrame {
      */
     public bankingAccount() {
         initComponents();
+        
     }
 
     /**
