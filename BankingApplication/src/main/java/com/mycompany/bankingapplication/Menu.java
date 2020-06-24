@@ -10,9 +10,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 
@@ -26,15 +28,47 @@ public final class Menu extends JFrame {
 DefaultListModel model;
 JList accountsList; 
 Scanner scan;
-    
+//outtermost container for content 
+JPanel container; 
+ //the container which will hold the accounts
+JPanel accountsPanel; 
+ //the container which will hold 
+ 
+ //the container which will hold the bottom panel of buttons.
+ JPanel bottomPanel; 
     public Menu() { 
-        
+        container = new JPanel();
+        container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
         accounts = new ArrayList<>();
         model = new DefaultListModel();
         
+        //we load the accounts 
         loadAccounts();
+        //edit the list 
+        editList(); 
+         //add Jlist to account panel 
+        accountsPanel = new JPanel();
+        accountsPanel.add(accountsList);
+        
+        //add the bottom panel
+        bottomPanel = new JPanel(); 
+        
+        //add buttons to the bottom panel
+        
+        //size the panels and add them to the frame 
+        
+        
         
     }
+    public void editList(){ 
+        //change the selection mode of the list to single selection 
+             accountsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+             
+             //set the dimensions of each cell in the JList
+             accountsList.setFixedCellHeight(75);
+             accountsList.setFixedCellWidth(75);
+    }
+    
     public void loadAccounts(){ 
         try{
         scan = new Scanner(new File("bankAccounts.txt"));
@@ -59,25 +93,13 @@ Scanner scan;
             for(int j = 0; j < accounts.size(); j++) { 
                 model.addElement(accounts.get(j).toString());
             }
-            //create and instantiate a list cell renderer
+            
             
             //add model to JList
              accountsList = new JList(model); 
             
-             //change the selection mode of the list to single selection 
-             accountsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-             
-             //set the dimensions of each cell in the JList
-             accountsList.setFixedCellHeight(75);
-             accountsList.setFixedCellWidth(75);
-            
-            
-            
-            //add Jlist to JFrame
-            add(accountsList);
-            
-            
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   
+       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Welcome, " + thisUser.getCustomerFirst() + " " + thisUser.getCustomerLast() + "------------------- " + thisUser.getCustomerId()  );       
         this.setSize(400,400);
         this.setLocationRelativeTo(null);
@@ -104,4 +126,5 @@ Scanner scan;
             
         });
     }
+   
 }
