@@ -5,6 +5,8 @@
  */
 package com.mycompany.bankingapplication;
 
+import java.util.Scanner;
+
 /**
  *
  * @author nazwright
@@ -14,6 +16,7 @@ package com.mycompany.bankingapplication;
     private String customerFirst; 
     private String customerLast; 
     private String customerId; 
+    
     
     public BankUser() { 
         customerFirst="";
@@ -67,6 +70,16 @@ package com.mycompany.bankingapplication;
      */
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
+    }
+    
+    /**
+     * 
+     * @param scan 
+     */
+    public void loadBankUser(Scanner scan) { 
+        this.setCustomerFirst(scan.nextLine());
+        this.setCustomerLast(scan.nextLine());
+        this.setCustomerId(scan.nextLine());
     }
     
 }

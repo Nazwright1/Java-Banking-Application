@@ -35,15 +35,20 @@ JPanel accountsPanel;
  //the container which will hold 
  
  //the container which will hold the bottom panel of buttons.
- JPanel bottomPanel; 
+ BottomPane bottomPanel; 
     public Menu() { 
+        //create a container 
         container = new JPanel();
-        container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        
+        //accounts for this user
         accounts = new ArrayList<>();
         model = new DefaultListModel();
         
         //we load the accounts 
         loadAccounts();
+        //we can use getUser if we do this after we load the accounts.
+        
         //edit the list 
         editList(); 
          //add Jlist to account panel 
@@ -51,7 +56,7 @@ JPanel accountsPanel;
         accountsPanel.add(accountsList);
         
         //add the bottom panel
-        bottomPanel = new JPanel(); 
+        bottomPanel = new BottomPane(); 
         
         //add buttons to the bottom panel
         
@@ -73,9 +78,7 @@ JPanel accountsPanel;
         try{
         scan = new Scanner(new File("bankAccounts.txt"));
         BankUser thisUser = new BankUser(); 
-        thisUser.setCustomerFirst(scan.nextLine());
-        thisUser.setCustomerLast(scan.nextLine());
-        thisUser.setCustomerId(scan.nextLine());
+        thisUser.loadBankUser(scan);
         
         int occurance = Integer.parseInt(scan.nextLine());
         while(scan.hasNext()){
