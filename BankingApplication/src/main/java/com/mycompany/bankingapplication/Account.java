@@ -5,6 +5,7 @@
  */
 package com.mycompany.bankingapplication;
 
+import java.util.Scanner;
 import javax.swing.ListModel;
 
 /**
@@ -78,6 +79,13 @@ public class Account  {
      */
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+    }
+    
+    public void loadAccounts(Scanner scan) { 
+        
+        this.setAccountType(scan.nextLine());
+        this.setAccountNumber(scan.nextLine());
+        this.setBalance(Double.parseDouble(scan.nextLine()));
     }
     @Override
     public String toString() { 

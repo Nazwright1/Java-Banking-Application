@@ -6,6 +6,7 @@
 package com.mycompany.bankingapplication;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -24,10 +25,11 @@ import javax.swing.SwingUtilities;
  */
 public final class Menu extends JFrame {
     
-    ArrayList <Account> accounts; 
+    ArrayList <Account> accounts;
+    BankUser user; 
 DefaultListModel model;
 JList accountsList; 
-Scanner scan;
+ Scanner scan;
 //outtermost container for content 
 JPanel container; 
  //the container which will hold the accounts
@@ -36,8 +38,13 @@ JPanel accountsPanel;
  
  //the container which will hold the bottom panel of buttons.
  BottomPane bottomPanel; 
-    public Menu() { 
-        //create a container 
+    public Menu()  { 
+        try {
+            //create a container
+            scan = new Scanner(new File("bankAccounts.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
         
@@ -46,9 +53,10 @@ JPanel accountsPanel;
         model = new DefaultListModel();
         
         //we load the accounts 
-        loadAccounts();
+        loadAccounts(scan);
         //we can use getUser if we do this after we load the accounts.
-        
+       
+           user = new BankUser();
         //edit the list 
         editList(); 
          //add Jlist to account panel 
@@ -58,6 +66,8 @@ JPanel accountsPanel;
         //add the bottom panel
         bottomPanel = new BottomPane(); 
         
+        add(accountsPanel);
+        add(bottomPanel);
         //add buttons to the bottom panel
         
         //size the panels and add them to the frame 
@@ -74,19 +84,20 @@ JPanel accountsPanel;
              accountsList.setFixedCellWidth(75);
     }
     
-    public void loadAccounts(){ 
-        try{
-        scan = new Scanner(new File("bankAccounts.txt"));
-        BankUser thisUser = new BankUser(); 
-        thisUser.loadBankUser(scan);
+    public void loadAccounts(Scanner scan){ 
+        
+        
+        //skip the lines already read in for the user.
+        //try to make scanner global for all classes starting with the login page to remove this loop.
+        for(int i = 0; i < 5; i++) { 
+            scan.nextLine();
+        }
         
         int occurance = Integer.parseInt(scan.nextLine());
         while(scan.hasNext()){
             for(int i = 0; i < occurance; i++) {
                 Account account = new Account();
-                account.setAccountType(scan.nextLine());
-                account.setAccountNumber(scan.nextLine());
-                account.setBalance(Double.parseDouble(scan.nextLine()));
+                account.loadAccounts(scan);
               
                 accounts.add(account);
             }
@@ -101,19 +112,17 @@ JPanel accountsPanel;
             //add model to JList
              accountsList = new JList(model); 
             
-   
+            
        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("Welcome, " + thisUser.getCustomerFirst() + " " + thisUser.getCustomerLast() + "------------------- " + thisUser.getCustomerId()  );       
+             
         this.setSize(400,400);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
             
             
-        } catch (Exception ex) {
-        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        } 
         
-        }
+        
     
         
     

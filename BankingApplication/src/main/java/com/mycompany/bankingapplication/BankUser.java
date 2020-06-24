@@ -12,16 +12,19 @@ import java.util.Scanner;
  * @author nazwright
  */
   public class BankUser {
-    
+    private String username; 
+    private String password; 
     private String customerFirst; 
     private String customerLast; 
     private String customerId; 
     
     
+   
     public BankUser() { 
         customerFirst="";
         customerLast="";
         customerId="";
+        
     }
     
     public BankUser(String first, String last, String custId) {
@@ -76,10 +79,34 @@ import java.util.Scanner;
      * 
      * @param scan 
      */
-    public void loadBankUser(Scanner scan) { 
-        this.setCustomerFirst(scan.nextLine());
-        this.setCustomerLast(scan.nextLine());
-        this.setCustomerId(scan.nextLine());
+   
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }

@@ -5,6 +5,12 @@
  */
 package com.mycompany.bankingapplication;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,12 +18,21 @@ import javax.swing.JOptionPane;
  * @author nazwright
  */
 public class loginPage extends javax.swing.JFrame {
-
+    BankUser user; 
+    //if true, the username and password combination is correct and we give access
+    boolean access; 
+    Scanner scan; 
+    String line;
+    String userName;
+    String passWord; 
+    
+    
     /**
      * Creates new form loginPage
      */
     public loginPage() {
         initComponents();
+        
     }
 
     /**
@@ -118,26 +133,51 @@ public class loginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_userNameTextFieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-       String userName = userNameTextField.getText(); 
-       String passWord = passWordTextField.getText(); 
+        
+        try {
+            scan = new Scanner(new File("bankAccounts.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(loginPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        access = false; 
        
-       if(userName.equals("admin") && passWord.equals("admin")) { 
-           //add another verification step before instantiating the menu class.
+        userName =userNameTextField.getText(); 
+        passWord = passWordTextField.getText(); 
+       
+       //while there is text in the file
+       while ((line = scan.nextLine()) != null) { 
+           //if this user name shows up in the system 
+           if(checkUserName(line, userName)) { 
+              //take the next line and check the password
+              //if the next line has the specified password 
+              if(checkPassword(scan.nextLine(), passWord)) { 
+                   access = true; 
+                   //create user 
+           user = new BankUser();
+           user.setUsername(userName);
+           user.setPassword(passWord);
+           user.setCustomerFirst(scan.nextLine());
+           user.setCustomerLast(scan.nextLine());
+           user.setCustomerId(scan.nextLine());
+                   break;
+               }
+               //grant access 
+           }
            
-           //instantiate the menu class 
+  }
+       //if access has been granted
+       if(access) { 
+           
+           
+            //create menu 
            Menu menu = new Menu(); 
+           //show the menu
            menu.setVisible(true);
-           //get rid of this form after the menu is up.
            
-
+            menu.setTitle("Welcome, " + user.getCustomerFirst() + " " + user.getCustomerLast() + "------------------- " + user.getCustomerId()  ); 
        }
-       else{ 
-           //show a dialog that lets the user know that their username is incorrect.
-           JOptionPane.showMessageDialog(null, "The username and password combination is incorrect.");
-           userNameTextField.setText("");
-           passWordTextField.setText(""); 
-           
-       }
+    
+      
       //would like to exit the program after 5 incorrect attempts 
     }//GEN-LAST:event_loginButtonActionPerformed
 
@@ -170,10 +210,17 @@ public class loginPage extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new loginPage().setVisible(true);
             }
         });
+    }
+    public boolean checkUserName(String line, String username) { 
+        return line.equals(userName);
+    }
+    public boolean checkPassword(String line, String password) { 
+        return line.equals(password);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
