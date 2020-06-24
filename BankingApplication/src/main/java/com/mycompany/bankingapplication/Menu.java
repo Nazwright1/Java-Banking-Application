@@ -13,17 +13,18 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 
 /**
  *
  * @author nazwright
  */
-public class Menu extends JFrame {
+public final class Menu extends JFrame {
     
     ArrayList <Account> accounts; 
 DefaultListModel model;
-JList newJList; 
+JList accountsList; 
 Scanner scan;
     
     public Menu() { 
@@ -60,10 +61,19 @@ Scanner scan;
             }
             //create and instantiate a list cell renderer
             
-            JList accountsList = new JList(model); 
+            //add model to JList
+             accountsList = new JList(model); 
             
-            //add the arraylist items to the jlist
+             //change the selection mode of the list to single selection 
+             accountsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+             
+             //set the dimensions of each cell in the JList
+             accountsList.setFixedCellHeight(75);
+             accountsList.setFixedCellWidth(75);
             
+            
+            
+            //add Jlist to JFrame
             add(accountsList);
             
             
