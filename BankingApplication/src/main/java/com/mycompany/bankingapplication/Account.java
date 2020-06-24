@@ -81,7 +81,7 @@ public class Account  {
     }
     @Override
     public String toString() { 
-        return getAccountType() + "         " + getAccountNumber() + "/n" + getBalance(); 
+        return getAccountType() + "         " + getAccountNumber() + "\n" + "$ " + getBalance(); 
     }
     
 }

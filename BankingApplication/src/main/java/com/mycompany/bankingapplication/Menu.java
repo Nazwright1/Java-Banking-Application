@@ -30,13 +30,17 @@ Scanner scan;
         
         accounts = new ArrayList<>();
         model = new DefaultListModel();
-        loadFrame();
+        
         loadAccounts();
         
     }
     public void loadAccounts(){ 
         try{
         scan = new Scanner(new File("bankAccounts.txt"));
+        BankUser thisUser = new BankUser(); 
+        thisUser.setCustomerFirst(scan.nextLine());
+        thisUser.setCustomerLast(scan.nextLine());
+        thisUser.setCustomerId(scan.nextLine());
         
         int occurance = Integer.parseInt(scan.nextLine());
         while(scan.hasNext()){
@@ -63,7 +67,11 @@ Scanner scan;
             add(accountsList);
             
             
-            
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("Welcome, " + thisUser.getCustomerFirst() + " " + thisUser.getCustomerLast() + "------------------- " + thisUser.getCustomerId()  );       
+        this.setSize(400,400);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
             
             
         } catch (Exception ex) {
@@ -71,13 +79,9 @@ Scanner scan;
     }
         
         }
-    public void loadFrame(){
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("JList Example");       
-        this.setSize(200,200);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-    }
+    
+        
+    
     
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable()  {
